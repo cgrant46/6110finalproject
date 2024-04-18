@@ -3,7 +3,7 @@ cd to the ns-3.40/src folder
 Run the following command: 
 ```bash
 git clone https://github.com/signetlabdei/quic quic
-```bash
+```
 
 Download the entire repository from github (https://github.com/signetlabdei/quic-ns-3/tree/master) and extract all files beginning with 'quic' from the src/applications/helper into your ns3 project (same path, there should be four of them)
 
@@ -19,7 +19,7 @@ Go into the src/applications/CMakeLists.txt file and paste the following under S
     model/quic-echo-client.cc
     model/quic-echo-server.cc
     model/quic-server.cc
-```python
+```
 
 Paste the following under HEADER_FILES
 
@@ -30,4 +30,4 @@ Paste the following under HEADER_FILES
     model/quic-echo-client.h
     model/quic-echo-server.h
     model/quic-server.h
-```python
+```
