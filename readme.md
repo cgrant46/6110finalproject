@@ -77,4 +77,9 @@ QuicEchoServer::GetTotalRx() const
 }
 ```
 
+Finally, in the ```QuicEchoServer::HandleRead(Ptr<Socket> socket)``` function, add the following line of code INSIDE THE WHILE LOOP:
+```c++
+m_totalRx += packet->GetSize();
+```
+
 
