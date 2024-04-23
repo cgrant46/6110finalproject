@@ -47,3 +47,34 @@ Paste the following under HEADER_FILES
     model/quic-echo-server.h
     model/quic-server.h
 ```
+
+Edits to the QUIC source code
+I added a private field to ```applications/model/quic-echo-server.h``` that makes it easier to track goodput
+Under the private fields, add:
+```c++
+uint64_t m_totalRx;
+```
+Under the public methods, add:
+```c++
+  /**
+   * \return the total bytes received in this app
+   */
+  uint64_t GetTotalRx() const;
+```
+In ```applications/model/quic-echo-server.cpp```, edit the constructor and add the following method:
+```c++
+QuicEchoServer::QuicEchoServer ()
+{
+  NS_LOG_FUNCTION (this);
+  m_totalRx = 0; //set total received to 0
+}
+
+uint64_t
+QuicEchoServer::GetTotalRx() const
+{
+  NS_LOG_FUNCTION(this);
+  return m_totalRx;
+}
+```
+
+
