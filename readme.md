@@ -82,7 +82,7 @@ Finally, in the ```QuicEchoServer::HandleRead(Ptr<Socket> socket)``` function, a
 ```c++
 m_totalRx += packet->GetSize();
 ```
-Line 458 of ```applications/model/quic-echo-client.cc``` was changed to:
+Line 458 of ```applications/model/quic-echo-client.cc```, along with line 223 of ```applications/model//quic-client.cc``` was changed to:
 ```c++
 if (m_sent < m_count || m_count == 0)
 ```
