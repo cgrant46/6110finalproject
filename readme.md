@@ -49,6 +49,7 @@ Paste the following under HEADER_FILES
 ```
 
 Edits to the QUIC source code
+
 I added a private field to ```applications/model/quic-echo-server.h``` that makes it easier to track goodput
 Under the private fields, add:
 ```c++
@@ -81,5 +82,8 @@ Finally, in the ```QuicEchoServer::HandleRead(Ptr<Socket> socket)``` function, a
 ```c++
 m_totalRx += packet->GetSize();
 ```
-
+Line 458 of ```applications/model/quic-echo-client.cc``` was changed to:
+```c++
+if (m_sent < m_count || m_count == 0)
+```
 
