@@ -50,7 +50,7 @@ Paste the following under HEADER_FILES
 
 Edits to the QUIC source code
 
-I added a private field to ```applications/model/quic-echo-server.h``` that makes it easier to track goodput
+I added a private field to ```applications/model/quic-echo-server.h``` AND ```applications/model/quic-server.h``` that makes it easier to track goodput
 Under the private fields, add:
 ```c++
 uint64_t m_totalRx;
@@ -62,7 +62,7 @@ Under the public methods, add:
    */
   uint64_t GetTotalRx() const;
 ```
-In ```applications/model/quic-echo-server.cpp```, edit the constructor and add the following method:
+In ```applications/model/quic-echo-server.cpp``` AND ```applications/model/quic-server.cpp```, edit the constructor and add the following method (BE SURE TO CHANGE CLASS MEMBERSHIP TO QuicServer):
 ```c++
 QuicEchoServer::QuicEchoServer ()
 {
@@ -71,7 +71,7 @@ QuicEchoServer::QuicEchoServer ()
 }
 
 uint64_t
-QuicEchoServer::GetTotalRx() const
+QuicEchoServer::GetTotalRx() const 
 {
   NS_LOG_FUNCTION(this);
   return m_totalRx;
