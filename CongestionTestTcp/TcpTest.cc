@@ -116,7 +116,10 @@ CwndTracer(uint32_t oldval, uint32_t newval)
             << Simulator::Now().GetSeconds() << "\t" << ssThreshValue[nodeId] << std::endl;
     }
 }
-
+static void Recompute(double interval){
+    Ipv4GlobalRoutingHelper::RecomputeRoutingTables();
+    Simulator::Schedule(Seconds(interval), Recompute, interval);
+}
 /**
  * Congestion window trace connection.
  *
@@ -398,7 +401,7 @@ main(int argc, char* argv[])
 
     NS_LOG_INFO("Initialize Global Routing.");
     Ipv4GlobalRoutingHelper::PopulateRoutingTables();
-
+    Simulator::Schedule(Seconds(0.01), &Recompute, 0.01);
     Simulator::Stop(Seconds(20.0));
     Simulator::Run(); 
     Simulator::Destroy();
