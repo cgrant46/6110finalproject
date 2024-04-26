@@ -62,7 +62,7 @@ Under the public methods, add:
    */
   uint64_t GetTotalRx() const;
 ```
-In ```applications/model/quic-echo-server.cpp``` AND ```applications/model/quic-server.cpp```, edit the constructor and add the following method (BE SURE TO CHANGE CLASS MEMBERSHIP TO QuicServer):
+In ```applications/model/quic-echo-server.cpp``` AND ```applications/model/quic-server.cpp```, edit the constructor and add the following method (PAY ATTENTION TO CLASS MEMBERSHIP):
 ```c++
 QuicEchoServer::QuicEchoServer ()
 {
@@ -70,8 +70,21 @@ QuicEchoServer::QuicEchoServer ()
   m_totalRx = 0; //set total received to 0
 }
 
+QuicServer::QuicServer ()
+{
+  NS_LOG_FUNCTION (this);
+  m_totalRx = 0; //set total received to 0
+}
+
 uint64_t
 QuicEchoServer::GetTotalRx() const 
+{
+  NS_LOG_FUNCTION(this);
+  return m_totalRx;
+}
+
+uint64_t
+QuicServer::GetTotalRx() const 
 {
   NS_LOG_FUNCTION(this);
   return m_totalRx;
