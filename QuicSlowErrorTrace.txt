@@ -1,0 +1,186 @@
+$ ./ns3 run --gdb "scratch/6110finalproject/CongestionTestQuic/quicTest --link=slow"
+.
+.
+.
+Starting application at 1.18857sec
+NS_ASSERT failed, cond="m_used != prev && m_used != next", +4.831908239s 0 file=/home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/network/model/packet-metadata.cc, line=416
+NS_FATAL, terminating
+terminate called without an active exception
+
+Program received signal SIGABRT, Aborted.
+__GI_raise (sig=sig@entry=6) at ../sysdeps/unix/sysv/linux/raise.c:50
+50      ../sysdeps/unix/sysv/linux/raise.c: No such file or directory.
+(gdb) bt
+#0  __GI_raise (sig=sig@entry=6) at ../sysdeps/unix/sysv/linux/raise.c:50
+#1  0x00007ffff35fd859 in __GI_abort () at abort.c:79
+#2  0x00007ffff39d58d1 in ?? () from /lib/x86_64-linux-gnu/libstdc++.so.6
+#3  0x00007ffff39e137c in ?? () from /lib/x86_64-linux-gnu/libstdc++.so.6
+#4  0x00007ffff39e13e7 in std::terminate() () from /lib/x86_64-linux-gnu/libstdc++.so.6
+#5  0x00007ffff4177442 in ns3::PacketMetadata::AddBig (this=0x5555559383d8, next=65535, prev=65520, item=0x7fffffff9290, extraItem=0x7fffffff92a0)
+    at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/network/model/packet-metadata.cc:416
+#6  0x00007ffff417c156 in ns3::PacketMetadata::AddAtEnd (this=0x5555559383d8, o=...) at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/network/model/packet-metadata.cc:856
+#7  0x00007ffff418da3e in ns3::Packet::AddAtEnd (this=0x555555938390, packet=...) at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/network/model/packet.cc:363
+--Type <RET> for more, q to quit, c to continue without paging--
+#8  0x00007ffff7c131ce in ns3::QuicSocketBase::SendDataPacket (this=0x555555875570, packetNumber=..., maxSize=107480, withAck=true)
+    at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/quic/model/quic-socket-base.cc:1335
+#9  0x00007ffff7c16133 in ns3::QuicSocketBase::DoRetransmit (this=0x555555875570, lostPackets=std::vector of length 1, capacity 1 = {...})
+    at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/quic/model/quic-socket-base.cc:1492
+#10 0x00007ffff7c227ae in ns3::QuicSocketBase::OnReceivedAckFrame (this=0x555555875570, sub=...) at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/quic/model/quic-socket-base.cc:2334
+#11 0x00007ffff7c1f4a6 in ns3::QuicSocketBase::OnReceivedFrame (this=0x555555875570, sub=...) at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/quic/model/quic-socket-base.cc:2094
+#12 0x00007ffff7cad477 in ns3::QuicL5Protocol::DispatchRecv (this=0x55555576a060, data=..., address=...) at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/quic/model/quic-l5-protocol.cc:304
+#13 0x00007ffff7c27e73 in ns3::QuicSocketBase::ReceivedData (this=0x555555875570, p=..., quicHeader=..., address=...)
+    at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/quic/model/quic-socket-base.cc:2778
+--Type <RET> for more, q to quit, c to continue without paging--
+#14 0x00007ffff7c52d5e in std::__invoke_impl<void, void (ns3::QuicSocketBase::*&)(ns3::Ptr<ns3::Packet>, ns3::QuicHeader const&, ns3::Address&), ns3::QuicSocketBase*, ns3::Ptr<ns3::Packet>, ns3::QuicHeader const&, ns3::Address&> (__f=
+    @0x5555557a92c0: (void (ns3::QuicSocketBase::*)(class ns3::QuicSocketBase * const, class ns3::Ptr<ns3::Packet>, const class ns3::QuicHeader &, class ns3::Address &)) 0x7ffff7c25c7a <ns3::QuicSocketBase::ReceivedData(ns3::Ptr<ns3::Packet>, ns3::QuicHeader const&, ns3::Address&)>, __t=@0x7fffffffa040: 0x555555875570) at /usr/include/c++/9/bits/invoke.h:73
+#15 0x00007ffff7c4e37f in std::__invoke<void (ns3::QuicSocketBase::*&)(ns3::Ptr<ns3::Packet>, ns3::QuicHeader const&, ns3::Address&), ns3::QuicSocketBase*, ns3::Ptr<ns3::Packet>, ns3::QuicHeader const&, ns3::Address&> (__fn=
+    @0x5555557a92c0: (void (ns3::QuicSocketBase::*)(class ns3::QuicSocketBase * const, class ns3::Ptr<ns3::Packet>, const class ns3::QuicHeader &, class ns3::Address &)) 0x7ffff7c25c7a <ns3::QuicSocketBase::ReceivedData(ns3::Ptr<ns3::Packet>, ns3::QuicHeader const&, ns3::Address&)>) at /usr/include/c++/9/bits/invoke.h:95
+#16 0x00007ffff7c4772b in std::_Function_handler<void (ns3::QuicSocketBase*, ns3::Ptr<ns3::Packet>, ns3::QuicHeader const&, ns3::Address&), void (ns3::QuicSocketBase::*)(ns3::Ptr<ns3::Packet>, ns3::Qu--Type <RET> for more, q to quit, c to continue without paging--
+icHeader const&, ns3::Address&)>::_M_invoke(std::_Any_data const&, ns3::QuicSocketBase*&&, ns3::Ptr<ns3::Packet>&&, ns3::QuicHeader const&, ns3::Address&) (__functor=..., 
+    __args#0=@0x7fffffffa040: 0x555555875570, __args#1=..., __args#2=..., __args#3=...) at /usr/include/c++/9/bits/std_function.h:357
+#17 0x00007ffff7c55a38 in std::function<void (ns3::QuicSocketBase*, ns3::Ptr<ns3::Packet>, ns3::QuicHeader const&, ns3::Address&)>::operator()(ns3::QuicSocketBase*, ns3::Ptr<ns3::Packet>, ns3::QuicHeader const&, ns3::Address&) const (this=0x5555557a92c0, __args#0=0x555555875570, __args#1=..., __args#2=..., __args#3=...) at /usr/include/c++/9/bits/std_function.h:688
+#18 0x00007ffff7c5303d in _ZZN3ns38CallbackIvJNS_3PtrINS_6PacketEEERKNS_10QuicHeaderERNS_7AddressEEEC4IMNS_14QuicSocketBaseEFvS3_S6_S8_ELi0EJPSB_EEET_DpT1_ENKUlDpOT_E_clIJS3_S6_S8_EEEvSK_ (
+    this=0x5555557a92c0) at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/core/model/callback.h:511
+#19 0x00007ffff7c4e61c in _ZNSt17_Function_handlerIFvN3ns33PtrINS0_6PacketEEERKNS0_10QuicHeaderERNS0_7AddressEEZNS0_8CallbackIvJS3_S6_S8_EEC4IMNS0_14QuicSocketBaseEFvS3_S6_S8_ELi0EJPSD_EEET_DpT1_EUlDpOT_E_E9_M_invokeERKSt9_Any_dataOS3_S6_S8_ (__functor=..., __args#0=..., __args#1=..., __args#2=...) at /usr/include/c++/9/bits/std_function.h:300
+#20 0x00007ffff7c77582 in std::function<void (ns3::Ptr<ns3::Packet>, ns3::QuicHeader const&, ns3::Address&)>::operator()(ns3::Ptr<ns3::Packet>, ns3::QuicHeader const&, ns3::Address&) const (
+--Type <RET> for more, q to quit, c to continue without paging--
+    this=0x5555556051b0, __args#0=..., __args#1=..., __args#2=...) at /usr/include/c++/9/bits/std_function.h:688
+#21 0x00007ffff7c74c16 in ns3::CallbackImpl<void, ns3::Ptr<ns3::Packet>, ns3::QuicHeader const&, ns3::Address&>::operator() (this=0x5555556051a0, uargs#0=..., uargs#1=..., uargs#2=...)
+    at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/core/model/callback.h:282
+#22 0x00007ffff7c72e13 in ns3::Callback<void, ns3::Ptr<ns3::Packet>, ns3::QuicHeader const&, ns3::Address&>::operator() (this=0x55555578fee8, uargs#0=..., uargs#1=..., uargs#2=...)
+    at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/core/model/callback.h:588
+#23 0x00007ffff7c6965a in ns3::QuicL4Protocol::ForwardUp (this=0x555555648ea0, sock=...) at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/quic/model/quic-l4-protocol.cc:565
+#24 0x00007ffff7c7a5b2 in std::__invoke_impl<void, void (ns3::QuicL4Protocol::*&)(ns3::Ptr<ns3::Socket>), ns3::QuicL4Protocol*, ns3::Ptr<ns3::Socket> > (__f=
+    @0x5555557a9020: (void (ns3::QuicL4Protocol::*)(class ns3::QuicL4Protocol * const, class ns3::Ptr<ns3::Socket>)) 0x7ffff7c66eec <ns3::QuicL4Protocol::ForwardUp(ns3::Ptr<ns3::Socket>)>, 
+    __t=@0x7fffffffa4c0: 0x555555648ea0) at /usr/include/c++/9/bits/invoke.h:73
+--Type <RET> for more, q to quit, c to continue without paging--
+#25 0x00007ffff7c79b50 in std::__invoke<void (ns3::QuicL4Protocol::*&)(ns3::Ptr<ns3::Socket>), ns3::QuicL4Protocol*, ns3::Ptr<ns3::Socket> > (__fn=
+    @0x5555557a9020: (void (ns3::QuicL4Protocol::*)(class ns3::QuicL4Protocol * const, class ns3::Ptr<ns3::Socket>)) 0x7ffff7c66eec <ns3::QuicL4Protocol::ForwardUp(ns3::Ptr<ns3::Socket>)>)
+    at /usr/include/c++/9/bits/invoke.h:95
+#26 0x00007ffff7c78fb3 in std::_Function_handler<void (ns3::QuicL4Protocol*, ns3::Ptr<ns3::Socket>), void (ns3::QuicL4Protocol::*)(ns3::Ptr<ns3::Socket>)>::_M_invoke(std::_Any_data const&, ns3::QuicL4Protocol*&&, ns3::Ptr<ns3::Socket>&&) (__functor=..., __args#0=@0x7fffffffa4c0: 0x555555648ea0, __args#1=...) at /usr/include/c++/9/bits/std_function.h:357
+#27 0x00007ffff7c7b1d5 in std::function<void (ns3::QuicL4Protocol*, ns3::Ptr<ns3::Socket>)>::operator()(ns3::QuicL4Protocol*, ns3::Ptr<ns3::Socket>) const (this=0x5555557a9020, 
+    __args#0=0x555555648ea0, __args#1=...) at /usr/include/c++/9/bits/std_function.h:688
+#28 0x00007ffff7c7a8c9 in _ZZN3ns38CallbackIvJNS_3PtrINS_6SocketEEEEEC4IMNS_14QuicL4ProtocolEFvS3_ELi0EJPS6_EEET_DpT1_ENKUlDpOT_E_clIJS3_EEEvSF_ (this=0x5555557a9020)
+    at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/core/model/callback.h:511
+--Type <RET> for more, q to quit, c to continue without paging--
+#29 0x00007ffff7c79e1c in _ZNSt17_Function_handlerIFvN3ns33PtrINS0_6SocketEEEEZNS0_8CallbackIvJS3_EEC4IMNS0_14QuicL4ProtocolEFvS3_ELi0EJPS8_EEET_DpT1_EUlDpOT_E_E9_M_invokeERKSt9_Any_dataOS3_ (
+    __functor=..., __args#0=...) at /usr/include/c++/9/bits/std_function.h:300
+#30 0x00007ffff419e8ef in std::function<void (ns3::Ptr<ns3::Socket>)>::operator()(ns3::Ptr<ns3::Socket>) const (this=0x5555555fdaa0, __args#0=...) at /usr/include/c++/9/bits/std_function.h:688
+#31 0x00007ffff419e306 in ns3::CallbackImpl<void, ns3::Ptr<ns3::Socket> >::operator() (this=0x5555555fda90, uargs#0=...)
+    at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/core/model/callback.h:282
+#32 0x00007ffff419d2cd in ns3::Callback<void, ns3::Ptr<ns3::Socket> >::operator() (this=0x555555875ed0, uargs#0=...) at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/core/model/callback.h:588
+#33 0x00007ffff4196d87 in ns3::Socket::NotifyDataRecv (this=0x555555875e50) at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/network/model/socket.cc:305
+#34 0x00007ffff4e26175 in ns3::UdpSocketImpl::ForwardUp (this=0x555555875e50, packet=..., header=..., port=49153, incomingInterface=...)
+    at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/internet/model/udp-socket-impl.cc:1076
+--Type <RET> for more, q to quit, c to continue without paging--
+#35 0x00007ffff4e3001b in std::__invoke_impl<void, void (ns3::UdpSocketImpl::*&)(ns3::Ptr<ns3::Packet>, ns3::Ipv4Header, unsigned short, ns3::Ptr<ns3::Ipv4Interface>), ns3::Ptr<ns3::UdpSocketImpl>, ns3::Ptr<ns3::Packet>, ns3::Ipv4Header, unsigned short, ns3::Ptr<ns3::Ipv4Interface> > (__f=
+    @0x55555575e8b0: (void (ns3::UdpSocketImpl::*)(class ns3::UdpSocketImpl * const, class ns3::Ptr<ns3::Packet>, class ns3::Ipv4Header, unsigned short, class ns3::Ptr<ns3::Ipv4Interface>)) 0x7ffff4e25c68 <ns3::UdpSocketImpl::ForwardUp(ns3::Ptr<ns3::Packet>, ns3::Ipv4Header, unsigned short, ns3::Ptr<ns3::Ipv4Interface>)>, __t=...) at /usr/include/c++/9/bits/invoke.h:73
+#36 0x00007ffff4e2e6a5 in std::__invoke<void (ns3::UdpSocketImpl::*&)(ns3::Ptr<ns3::Packet>, ns3::Ipv4Header, unsigned short, ns3::Ptr<ns3::Ipv4Interface>), ns3::Ptr<ns3::UdpSocketImpl>, ns3::Ptr<ns3::Packet>, ns3::Ipv4Header, unsigned short, ns3::Ptr<ns3::Ipv4Interface> > (__fn=
+    @0x55555575e8b0: (void (ns3::UdpSocketImpl::*)(class ns3::UdpSocketImpl * const, class ns3::Ptr<ns3::Packet>, class ns3::Ipv4Header, unsigned short, class ns3::Ptr<ns3::Ipv4Interface>)) 0x7ffff4e25c68 <ns3::UdpSocketImpl::ForwardUp(ns3::Ptr<ns3::Packet>, ns3::Ipv4Header, unsigned short, ns3::Ptr<ns3::Ipv4Interface>)>) at /usr/include/c++/9/bits/invoke.h:95
+#37 0x00007ffff4e2cbf9 in std::_Function_handler<void (ns3::Ptr<ns3::UdpSocketImpl>, ns3::Ptr<ns3::Packet>, ns3::Ipv4Header, unsigned short, ns3::Ptr<ns3::Ipv4Interface>), void (ns3::UdpSocketImpl::*)--Type <RET> for more, q to quit, c to continue without paging--
+(ns3::Ptr<ns3::Packet>, ns3::Ipv4Header, unsigned short, ns3::Ptr<ns3::Ipv4Interface>)>::_M_invoke(std::_Any_data const&, ns3::Ptr<ns3::UdpSocketImpl>&&, ns3::Ptr<ns3::Packet>&&, ns3::Ipv4Header&&, unsigned short&&, ns3::Ptr<ns3::Ipv4Interface>&&) (__functor=..., __args#0=..., __args#1=..., __args#2=..., __args#3=@0x7fffffffa90c: 49153, __args#4=...) at /usr/include/c++/9/bits/std_function.h:357
+#38 0x00007ffff4e324e1 in std::function<void (ns3::Ptr<ns3::UdpSocketImpl>, ns3::Ptr<ns3::Packet>, ns3::Ipv4Header, unsigned short, ns3::Ptr<ns3::Ipv4Interface>)>::operator()(ns3::Ptr<ns3::UdpSocketImpl>, ns3::Ptr<ns3::Packet>, ns3::Ipv4Header, unsigned short, ns3::Ptr<ns3::Ipv4Interface>) const (this=0x55555575e8b0, __args#0=..., __args#1=..., __args#2=..., __args#3=49153, __args#4=...)
+    at /usr/include/c++/9/bits/std_function.h:688
+#39 0x00007ffff4e30424 in _ZZN3ns38CallbackIvJNS_3PtrINS_6PacketEEENS_10Ipv4HeaderEtNS1_INS_13Ipv4InterfaceEEEEEC4IMNS_13UdpSocketImplEFvS3_S4_tS6_ELi0EJNS1_IS9_EEEEET_DpT1_ENKUlDpOT_E_clIJS3_S4_tS6_EEEvSI_ (this=0x55555575e8b0) at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/core/model/callback.h:511
+#40 0x00007ffff4e2e9c0 in _ZNSt17_Function_handlerIFvN3ns33PtrINS0_6PacketEEENS0_10Ipv4HeaderEtNS1_INS0_13Ipv4InterfaceEEEEZNS0_8CallbackIvJS3_S4_tS6_EEC4IMNS0_13UdpSocketImplEFvS3_S4_tS6_ELi0EJNS1_ISB_EEEEET_DpT1_EUlDpOT_E_E9_M_invokeERKSt9_Any_dataOS3_OS4_OtOS6_ (__functor=..., __args#0=..., __args#1=..., __args#2=@0x7fffffffaa94: 49153, __args#3=...)
+--Type <RET> for more, q to quit, c to continue without paging--
+    at /usr/include/c++/9/bits/std_function.h:300
+#41 0x00007ffff4b049ae in std::function<void (ns3::Ptr<ns3::Packet>, ns3::Ipv4Header, unsigned short, ns3::Ptr<ns3::Ipv4Interface>)>::operator()(ns3::Ptr<ns3::Packet>, ns3::Ipv4Header, unsigned short, ns3::Ptr<ns3::Ipv4Interface>) const (this=0x555555607050, __args#0=..., __args#1=..., __args#2=49153, __args#3=...) at /usr/include/c++/9/bits/std_function.h:688
+#42 0x00007ffff4b047eb in ns3::CallbackImpl<void, ns3::Ptr<ns3::Packet>, ns3::Ipv4Header, unsigned short, ns3::Ptr<ns3::Ipv4Interface> >::operator() (this=0x555555607040, uargs#0=..., uargs#1=..., 
+    uargs#2=49153, uargs#3=...) at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/core/model/callback.h:282
+#43 0x00007ffff4b045ee in ns3::Callback<void, ns3::Ptr<ns3::Packet>, ns3::Ipv4Header, unsigned short, ns3::Ptr<ns3::Ipv4Interface> >::operator() (this=0x55555560eb40, uargs#0=..., uargs#1=..., 
+    uargs#2=49153, uargs#3=...) at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/core/model/callback.h:588
+#44 0x00007ffff4b03b6d in ns3::Ipv4EndPoint::ForwardUp (this=0x55555560eb20, p=..., header=..., sport=49153, incomingInterface=...)
+    at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/internet/model/ipv4-end-point.cc:143
+--Type <RET> for more, q to quit, c to continue without paging--
+#45 0x00007ffff4e134a7 in ns3::UdpL4Protocol::Receive (this=0x55555577f720, packet=..., header=..., interface=...)
+    at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/internet/model/udp-l4-protocol.cc:387
+#46 0x00007ffff4b3298c in ns3::Ipv4L3Protocol::LocalDeliver (this=0x5555555d41a0, packet=..., ip=..., iif=1)
+    at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/internet/model/ipv4-l3-protocol.cc:1133
+#47 0x00007ffff4b5d6f6 in std::__invoke_impl<void, void (ns3::Ipv4L3Protocol::*&)(ns3::Ptr<ns3::Packet const>, ns3::Ipv4Header const&, unsigned int), ns3::Ipv4L3Protocol*, ns3::Ptr<ns3::Packet const>, ns3::Ipv4Header const&, unsigned int> (__f=
+    @0x55555577d0c0: (void (ns3::Ipv4L3Protocol::*)(class ns3::Ipv4L3Protocol * const, class ns3::Ptr<ns3::Packet const>, const class ns3::Ipv4Header &, unsigned int)) 0x7ffff4b3217c <ns3::Ipv4L3Protocol::LocalDeliver(ns3::Ptr<ns3::Packet const>, ns3::Ipv4Header const&, unsigned int)>, __t=@0x7fffffffb170: 0x5555555d41a0) at /usr/include/c++/9/bits/invoke.h:73
+#48 0x00007ffff4b599b3 in std::__invoke<void (ns3::Ipv4L3Protocol::*&)(ns3::Ptr<ns3::Packet const>, ns3::Ipv4Header const&, unsigned int), ns3::Ipv4L3Protocol*, ns3::Ptr<ns3::Packet const>, ns3::Ipv4H--Type <RET> for more, q to quit, c to continue without paging--
+eader const&, unsigned int> (__fn=
+    @0x55555577d0c0: (void (ns3::Ipv4L3Protocol::*)(class ns3::Ipv4L3Protocol * const, class ns3::Ptr<ns3::Packet const>, const class ns3::Ipv4Header &, unsigned int)) 0x7ffff4b3217c <ns3::Ipv4L3Protocol::LocalDeliver(ns3::Ptr<ns3::Packet const>, ns3::Ipv4Header const&, unsigned int)>) at /usr/include/c++/9/bits/invoke.h:95
+#49 0x00007ffff4b540f1 in std::_Function_handler<void (ns3::Ipv4L3Protocol*, ns3::Ptr<ns3::Packet const>, ns3::Ipv4Header const&, unsigned int), void (ns3::Ipv4L3Protocol::*)(ns3::Ptr<ns3::Packet const>, ns3::Ipv4Header const&, unsigned int)>::_M_invoke(std::_Any_data const&, ns3::Ipv4L3Protocol*&&, ns3::Ptr<ns3::Packet const>&&, ns3::Ipv4Header const&, unsigned int&&) (__functor=..., 
+    __args#0=@0x7fffffffb170: 0x5555555d41a0, __args#1=..., __args#2=..., __args#3=@0x7fffffffb15c: 1) at /usr/include/c++/9/bits/std_function.h:357
+#50 0x00007ffff4b61072 in std::function<void (ns3::Ipv4L3Protocol*, ns3::Ptr<ns3::Packet const>, ns3::Ipv4Header const&, unsigned int)>::operator()(ns3::Ipv4L3Protocol*, ns3::Ptr<ns3::Packet const>, ns3::Ipv4Header const&, unsigned int) const (this=0x55555577d0c0, __args#0=0x5555555d41a0, __args#1=..., __args#2=..., __args#3=1) at /usr/include/c++/9/bits/std_function.h:688
+#51 0x00007ffff4b5d9d5 in _ZZN3ns38CallbackIvJNS_3PtrIKNS_6PacketEEERKNS_10Ipv4HeaderEjEEC4IMNS_14Ipv4L3ProtocolEFvS4_S7_jELi0EJPSA_EEET_DpT1_ENKUlDpOT_E_clIJS4_S7_jEEEvSJ_ (this=0x55555577d0c0)
+--Type <RET> for more, q to quit, c to continue without paging--
+    at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/core/model/callback.h:511
+#52 0x00007ffff4b59c50 in _ZNSt17_Function_handlerIFvN3ns33PtrIKNS0_6PacketEEERKNS0_10Ipv4HeaderEjEZNS0_8CallbackIvJS4_S7_jEEC4IMNS0_14Ipv4L3ProtocolEFvS4_S7_jELi0EJPSC_EEET_DpT1_EUlDpOT_E_E9_M_invokeERKSt9_Any_dataOS4_S7_Oj (__functor=..., __args#0=..., __args#1=..., __args#2=@0x7fffffffb264: 1) at /usr/include/c++/9/bits/std_function.h:300
+#53 0x00007ffff7a6842d in std::function<void (ns3::Ptr<ns3::Packet const>, ns3::Ipv4Header const&, unsigned int)>::operator()(ns3::Ptr<ns3::Packet const>, ns3::Ipv4Header const&, unsigned int) const
+    (this=0x55555577cd90, __args#0=..., __args#1=..., __args#2=1) at /usr/include/c++/9/bits/std_function.h:688
+#54 0x00007ffff7a613a4 in ns3::CallbackImpl<void, ns3::Ptr<ns3::Packet const>, ns3::Ipv4Header const&, unsigned int>::operator() (this=0x55555577cd80, uargs#0=..., uargs#1=..., uargs#2=1)
+    at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/core/model/callback.h:282
+#55 0x00007ffff7a5b5ef in ns3::Callback<void, ns3::Ptr<ns3::Packet const>, ns3::Ipv4Header const&, unsigned int>::operator() (this=0x5555555d4418, uargs#0=..., uargs#1=..., uargs#2=1)
+    at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/core/model/callback.h:588
+--Type <RET> for more, q to quit, c to continue without paging--
+#56 0x00007ffff4b6fa95 in ns3::Ipv4ListRouting::RouteInput (this=0x55555577d860, p=..., header=..., idev=..., ucb=..., mcb=..., lcb=..., ecb=...)
+    at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/internet/model/ipv4-list-routing.cc:160
+#57 0x00007ffff4b2b5eb in ns3::Ipv4L3Protocol::Receive (this=0x5555555d41a0, device=..., p=..., protocol=2048, from=..., to=..., packetType=0)
+    at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/internet/model/ipv4-l3-protocol.cc:674
+#58 0x00007ffff4b5e3e1 in std::__invoke_impl<void, void (ns3::Ipv4L3Protocol::*&)(ns3::Ptr<ns3::NetDevice>, ns3::Ptr<ns3::Packet const>, unsigned short, ns3::Address const&, ns3::Address const&, ns3::NetDevice::PacketType), ns3::Ipv4L3Protocol*, ns3::Ptr<ns3::NetDevice>, ns3::Ptr<ns3::Packet const>, unsigned short, ns3::Address const&, ns3::Address const&, ns3::NetDevice::PacketType> (__f=
+    @0x55555579ed60: (void (ns3::Ipv4L3Protocol::*)(class ns3::Ipv4L3Protocol * const, class ns3::Ptr<ns3::NetDevice>, class ns3::Ptr<ns3::Packet const>, unsigned short, const class ns3::Address &, const class ns3::Address &, enum ns3::NetDevice::PacketType)) 0x7ffff4b29ea2 <ns3::Ipv4L3Protocol::Receive(ns3::Ptr<ns3::NetDevice>, ns3::Ptr<ns3::Packet const>, unsigned short, ns3::Address const&, ns3::Address const&, ns3::NetDevice::PacketType)>, __t=@0x7fffffffb8d0: 0x5555555d41a0) at /usr/include/c++/9/bits/invoke.h:73
+#59 0x00007ffff4b5a670 in std::__invoke<void (ns3::Ipv4L3Protocol::*&)(ns3::Ptr<ns3::NetDevice>, ns3::Ptr<ns3::Packet const>, unsigned short, ns3::Address const&, ns3::Address const&, ns3::NetDevice::PacketType), ns3::Ipv4L3Protocol*, ns3::Ptr<ns3::NetDevice>, ns3::Ptr<ns3::Packet const>, unsigned short, ns3::Address const&, ns3::Address const&, ns3::NetDevice::PacketType> (__fn=
+    @0x55555579ed60: (void (ns3::Ipv4L3Protocol::*)(class ns3::Ipv4L3Protocol * const, class ns3::Ptr<ns3::NetDevice>, class ns3::Ptr<ns3::Packet const>, unsigned short, const class ns3::Address &, const class ns3::Address &, enum ns3::NetDevice::PacketType)) 0x7ffff4b29ea2 <ns3::Ipv4L3Protocol::Receive(ns3::Ptr<ns3::NetDevice>, ns3::Ptr<ns3::Packet const>, unsigned short, ns3::Address const&, ns3::Address const&, ns3::NetDevice::PacketType)>) at /usr/include/c++/9/bits/invoke.h:95
+#60 0x00007ffff4b5516f in std::_Function_handler<void (ns3::Ipv4L3Protocol*, ns3::Ptr<ns3::NetDevice>, ns3::Ptr<ns3::Packet const>, unsigned short, ns3::Address const&, ns3::Address const&, ns3::NetDevice::PacketType), void (ns3::Ipv4L3Protocol::*)(ns3::Ptr<ns3::NetDevice>, ns3::Ptr<ns3::Packet const>, unsigned short, ns3::Address const&, ns3::Address const&, ns3::NetDevice::PacketType)>::_M_invoke(std::_Any_data const&, ns3::Ipv4L3Protocol*&&, ns3::Ptr<ns3::NetDevice>&&, ns3::Ptr<ns3::Packet const>&&, unsigned short&&, ns3::Address const&, ns3::Address const&, ns3::NetDevice::PacketType&&) (
+    __functor=..., __args#0=@0x7fffffffb8d0: 0x5555555d41a0, __args#1=..., __args#2=..., __args#3=@0x7fffffffb8bc: 2048, __args#4=..., __args#5=..., __args#6=@0x7fffffffb928: 0)
+    at /usr/include/c++/9/bits/std_function.h:357
+#61 0x00007ffff4b616a2 in std::function<void (ns3::Ipv4L3Protocol*, ns3::Ptr<ns3::NetDevice>, ns3::Ptr<ns3::Packet const>, unsigned short, ns3::Address const&, ns3::Address const&, ns3::NetDevice::PacketType)>::operator()(ns3::Ipv4L3Protocol*, ns3::Ptr<ns3::NetDevice>, ns3::Ptr<ns3::Packet const>, unsigned short, ns3::Address const&, ns3::Address const&, ns3::NetDevice::PacketType) const (
+    this=0x55555579ed60, __args#0=0x5555555d41a0, __args#1=..., __args#2=..., __args#3=2048, __args#4=..., __args#5=..., __args#6=0) at /usr/include/c++/9/bits/std_function.h:688
+#62 0x00007ffff4b5e749 in _ZZN3ns38CallbackIvJNS_3PtrINS_9NetDeviceEEENS1_IKNS_6PacketEEEtRKNS_7AddressES9_NS2_10PacketTypeEEEC4IMNS_14Ipv4L3ProtocolEFvS3_S6_tS9_S9_SA_ELi0EJPSD_EEET_DpT1_ENKUlDpOT_E_clIJS3_S6_tS9_S9_SA_EEEvSM_ (this=0x55555579ed60) at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/core/model/callback.h:511
+#63 0x00007ffff4b5a955 in _ZNSt17_Function_handlerIFvN3ns33PtrINS0_9NetDeviceEEENS1_IKNS0_6PacketEEEtRKNS0_7AddressES9_NS2_10PacketTypeEEZNS0_8CallbackIvJS3_S6_tS9_S9_SA_EEC4IMNS0_14Ipv4L3ProtocolEFvS3_S6_tS9_S9_SA_ELi0EJPSF_EEET_DpT1_EUlDpOT_E_E9_M_invokeERKSt9_Any_dataOS3_OS6_OtS9_S9_OSA_ (__functor=..., __args#0=..., __args#1=..., __args#2=@0x7fffffffba94: 2048, __args#3=..., __args#4=..., 
+    __args#5=@0x7fffffffbaf0: 0) at /usr/include/c++/9/bits/std_function.h:300
+#64 0x00007ffff416d826 in std::function<void (ns3::Ptr<ns3::NetDevice>, ns3::Ptr<ns3::Packet const>, unsigned short, ns3::Address const&, ns3::Address const&, ns3::NetDevice::PacketType)>::operator()(ns3::Ptr<ns3::NetDevice>, ns3::Ptr<ns3::Packet const>, unsigned short, ns3::Address const&, ns3::Address const&, ns3::NetDevice::PacketType) const (this=0x55555579ed20, __args#0=..., __args#1=..., 
+    __args#2=2048, __args#3=..., __args#4=..., __args#5=0) at /usr/include/c++/9/bits/std_function.h:688
+#65 0x00007ffff416becf in ns3::CallbackImpl<void, ns3::Ptr<ns3::NetDevice>, ns3::Ptr<ns3::Packet const>, unsigned short, ns3::Address const&, ns3::Address const&, ns3::NetDevice::PacketType>::operator() (this=0x55555579ed10, uargs#0=..., uargs#1=..., uargs#2=2048, uargs#3=..., uargs#4=..., uargs#5=0) at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/core/model/callback.h:282
+#66 0x00007ffff416a02c in ns3::Callback<void, ns3::Ptr<ns3::NetDevice>, ns3::Ptr<ns3::Packet const>, unsigned short, ns3::Address const&, ns3::Address const&, ns3::NetDevice::PacketType>::operator()
+    (this=0x5555557b0970, uargs#0=..., uargs#1=..., uargs#2=2048, uargs#3=..., uargs#4=..., uargs#5=0) at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/core/model/callback.h:588
+#67 0x00007ffff10823e5 in ns3::TrafficControlLayer::Receive (this=0x55555577dc10, device=..., p=..., protocol=2048, from=..., to=..., packetType=0)
+    at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/traffic-control/model/traffic-control-layer.cc:349
+#68 0x00007ffff4b5ea74 in std::__invoke_impl<void, void (ns3::TrafficControlLayer::*&)(ns3::Ptr<ns3::NetDevice>, ns3::Ptr<ns3::Packet const>, unsigned short, ns3::Address const&, ns3::Address const&, ns3::NetDevice::PacketType), ns3::Ptr<ns3::TrafficControlLayer>, ns3::Ptr<ns3::NetDevice>, ns3::Ptr<ns3::Packet const>, unsigned short, ns3::Address const&, ns3::Address const&, ns3::NetDevice::Packet--Type <RET> for more, q to quit, c to continue without paging--
+Type> (__f=@0x55555579e830: &virtual table offset 88, __t=...) at /usr/include/c++/9/bits/invoke.h:73
+#69 0x00007ffff4b5ac5b in std::__invoke<void (ns3::TrafficControlLayer::*&)(ns3::Ptr<ns3::NetDevice>, ns3::Ptr<ns3::Packet const>, unsigned short, ns3::Address const&, ns3::Address const&, ns3::NetDevice::PacketType), ns3::Ptr<ns3::TrafficControlLayer>, ns3::Ptr<ns3::NetDevice>, ns3::Ptr<ns3::Packet const>, unsigned short, ns3::Address const&, ns3::Address const&, ns3::NetDevice::PacketType> (
+    __fn=@0x55555579e830: &virtual table offset 88) at /usr/include/c++/9/bits/invoke.h:95
+#70 0x00007ffff4b5567b in std::_Function_handler<void (ns3::Ptr<ns3::TrafficControlLayer>, ns3::Ptr<ns3::NetDevice>, ns3::Ptr<ns3::Packet const>, unsigned short, ns3::Address const&, ns3::Address const&, ns3::NetDevice::PacketType), void (ns3::TrafficControlLayer::*)(ns3::Ptr<ns3::NetDevice>, ns3::Ptr<ns3::Packet const>, unsigned short, ns3::Address const&, ns3::Address const&, ns3::NetDevice::PacketType)>::_M_invoke(std::_Any_data const&, ns3::Ptr<ns3::TrafficControlLayer>&&, ns3::Ptr<ns3::NetDevice>&&, ns3::Ptr<ns3::Packet const>&&, unsigned short&&, ns3::Address const&, ns3::Address const&, ns3::NetDevice::PacketType&&) (__functor=..., __args#0=..., __args#1=..., __args#2=..., __args#3=@0x7fffffffbefc: 2048, __args#4=..., __args#5=..., __args#6=@0x7fffffffbf68: 0)
+    at /usr/include/c++/9/bits/std_function.h:357
+#71 0x00007ffff4b61c8e in std::function<void (ns3::Ptr<ns3::TrafficControlLayer>, ns3::Ptr<ns3::NetDevice>, ns3::Ptr<ns3::Packet const>, unsigned short, ns3::Address const&, ns3::Address const&, ns3::NetDevice::PacketType)>::operator()(ns3::Ptr<ns3::TrafficControlLayer>, ns3::Ptr<ns3::NetDevice>, ns3::Ptr<ns3::Packet const>, unsigned short, ns3::Address const&, ns3::Address const&, ns3::NetDevice::PacketType) const (this=0x55555579e830, __args#0=..., __args#1=..., __args#2=..., __args#3=2048, __args#4=..., __args#5=..., __args#6=0) at /usr/include/c++/9/bits/std_function.h:688
+#72 0x00007ffff4b5ee7c in _ZZN3ns38CallbackIvJNS_3PtrINS_9NetDeviceEEENS1_IKNS_6PacketEEEtRKNS_7AddressES9_NS2_10PacketTypeEEEC4IMNS_19TrafficControlLayerEFvS3_S6_tS9_S9_SA_ELi0EJNS1_ISD_EEEEET_DpT1_ENKUlDpOT_E_clIJS3_S6_tS9_S9_SA_EEEvSM_ (this=0x55555579e830) at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/core/model/callback.h:511
+#73 0x00007ffff4b5afa5 in _ZNSt17_Function_handlerIFvN3ns33PtrINS0_9NetDeviceEEENS1_IKNS0_6PacketEEEtRKNS0_7AddressES9_NS2_10PacketTypeEEZNS0_8CallbackIvJS3_S6_tS9_S9_SA_EEC4IMNS0_19TrafficControlLayerEFvS3_S6_tS9_S9_SA_ELi0EJNS1_ISF_EEEEET_DpT1_EUlDpOT_E_E9_M_invokeERKSt9_Any_dataOS3_OS6_OtS9_S9_OSA_ (__functor=..., __args#0=..., __args#1=..., __args#2=@0x7fffffffc0d4: 2048, __args#3=..., 
+    __args#4=..., __args#5=@0x7fffffffc130: 0) at /usr/include/c++/9/bits/std_function.h:300
+#74 0x00007ffff416d826 in std::function<void (ns3::Ptr<ns3::NetDevice>, ns3::Ptr<ns3::Packet const>, unsigned short, ns3::Address const&, ns3::Address const&, ns3::NetDevice::PacketType)>::operator()(ns3::Ptr<ns3::NetDevice>, ns3::Ptr<ns3::Packet const>, unsigned short, ns3::Address const&, ns3::Address const&, ns3::NetDevice::PacketType) const (this=0x55555579dfb0, __args#0=..., __args#1=..., 
+    __args#2=2048, __args#3=..., __args#4=..., __args#5=0) at /usr/include/c++/9/bits/std_function.h:688
+#75 0x00007ffff416becf in ns3::CallbackImpl<void, ns3::Ptr<ns3::NetDevice>, ns3::Ptr<ns3::Packet const>, unsigned short, ns3::Address const&, ns3::Address const&, ns3::NetDevice::PacketType>::operator() (this=0x55555579dfa0, uargs#0=..., uargs#1=..., uargs#2=2048, uargs#3=..., uargs#4=..., uargs#5=0) at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/core/model/callback.h:282
+#76 0x00007ffff416a02c in ns3::Callback<void, ns3::Ptr<ns3::NetDevice>, ns3::Ptr<ns3::Packet const>, unsigned short, ns3::Address const&, ns3::Address const&, ns3::NetDevice::PacketType>::operator()
+    (this=0x5555557a77d0, uargs#0=..., uargs#1=..., uargs#2=2048, uargs#3=..., uargs#4=..., uargs#5=0) at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/core/model/callback.h:588
+#77 0x00007ffff4167b2b in ns3::Node::ReceiveFromDevice (this=0x55555577b100, device=..., packet=..., protocol=2048, from=..., to=..., packetType=0, promiscuous=false)
+    at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/network/model/node.cc:349
+#78 0x00007ffff416720a in ns3::Node::NonPromiscReceiveFromDevice (this=0x55555577b100, device=..., packet=..., protocol=2048, from=...)
+    at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/network/model/node.cc:312
+#79 0x00007ffff416fc78 in std::__invoke_impl<bool, bool (ns3::Node::*&)(ns3::Ptr<ns3::NetDevice>, ns3::Ptr<ns3::Packet const>, unsigned short, ns3::Address const&), ns3::Node*, ns3::Ptr<ns3::NetDevice>, ns3::Ptr<ns3::Packet const>, unsigned short, ns3::Address const&> (__f=
+    @0x55555579d930: (bool (ns3::Node::*)(class ns3::Node * const, class ns3::Ptr<ns3::NetDevice>, class ns3::Ptr<ns3::Packet const>, unsigned short, const class ns3::Address &)) 0x7ffff4166f8a <ns3::Node::NonPromiscReceiveFromDevice(ns3::Ptr<ns3::NetDevice>, ns3::Ptr<ns3::Packet const>, unsigned short, ns3::Address const&)>, __t=@0x7fffffffc570: 0x55555577b100)
+    at /usr/include/c++/9/bits/invoke.h:73
+#80 0x00007ffff416ed83 in std::__invoke<bool (ns3::Node::*&)(ns3::Ptr<ns3::NetDevice>, ns3::Ptr<ns3::Packet const>, unsigned short, ns3::Address const&), ns3::Node*, ns3::Ptr<ns3::NetDevice>, ns3::Ptr<ns3::Packet const>, unsigned short, ns3::Address const&> (__fn=
+    @0x55555579d930: (bool (ns3::Node::*)(class ns3::Node * const, class ns3::Ptr<ns3::NetDevice>, class ns3::Ptr<ns3::Packet const>, unsigned short, const class ns3::Address &)) 0x7ffff4166f8a <ns3::Node::NonPromiscReceiveFromDevice(ns3::Ptr<ns3::NetDevice>, ns3::Ptr<ns3::Packet const>, unsigned short, ns3::Address const&)>) at /usr/include/c++/9/bits/invoke.h:95
+#81 0x00007ffff416dea7 in std::_Function_handler<bool (ns3::Node*, ns3::Ptr<ns3::NetDevice>, ns3::Ptr<ns3::Packet const>, unsigned short, ns3::Address const&), bool (ns3::Node::*)(ns3::Ptr<ns3::NetDev--Type <RET> for more, q to quit, c to continue without paging--
+ice>, ns3::Ptr<ns3::Packet const>, unsigned short, ns3::Address const&)>::_M_invoke(std::_Any_data const&, ns3::Node*&&, ns3::Ptr<ns3::NetDevice>&&, ns3::Ptr<ns3::Packet const>&&, unsigned short&&, ns3::Address const&) (__functor=..., __args#0=@0x7fffffffc570: 0x55555577b100, __args#1=..., __args#2=..., __args#3=@0x7fffffffc55c: 2048, __args#4=...) at /usr/include/c++/9/bits/std_function.h:317
+#82 0x00007ffff4170fe5 in std::function<bool (ns3::Node*, ns3::Ptr<ns3::NetDevice>, ns3::Ptr<ns3::Packet const>, unsigned short, ns3::Address const&)>::operator()(ns3::Node*, ns3::Ptr<ns3::NetDevice>, ns3::Ptr<ns3::Packet const>, unsigned short, ns3::Address const&) const (this=0x55555579d930, __args#0=0x55555577b100, __args#1=..., __args#2=..., __args#3=2048, __args#4=...)
+    at /usr/include/c++/9/bits/std_function.h:688
+#83 0x00007ffff4170013 in _ZZN3ns38CallbackIbJNS_3PtrINS_9NetDeviceEEENS1_IKNS_6PacketEEEtRKNS_7AddressEEEC4IMNS_4NodeEFbS3_S6_tS9_ELi0EJPSC_EEET_DpT1_ENKUlDpOT_E_clIJS3_S6_tS9_EEEbSL_ (
+    this=0x55555579d930) at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/core/model/callback.h:511
+#84 0x00007ffff416f09c in _ZNSt17_Function_handlerIFbN3ns33PtrINS0_9NetDeviceEEENS1_IKNS0_6PacketEEEtRKNS0_7AddressEEZNS0_8CallbackIbJS3_S6_tS9_EEC4IMNS0_4NodeEFbS3_S6_tS9_ELi0EJPSE_EEET_DpT1_EUlDpOT_E_E9_M_invokeERKSt9_Any_dataOS3_OS6_OtS9_ (__functor=..., __args#0=..., __args#1=..., __args#2=@0x7fffffffc6b4: 2048, __args#3=...) at /usr/include/c++/9/bits/std_function.h:285
+#85 0x00007ffff7e08ece in std::function<bool (ns3::Ptr<ns3::NetDevice>, ns3::Ptr<ns3::Packet const>, unsigned short, ns3::Address const&)>::operator()(ns3::Ptr<ns3::NetDevice>, ns3::Ptr<ns3::Packet const>, unsigned short, ns3::Address const&) const (this=0x55555579d850, __args#0=..., __args#1=..., __args#2=2048, __args#3=...) at /usr/include/c++/9/bits/std_function.h:688
+#86 0x00007ffff7e037d8 in ns3::CallbackImpl<bool, ns3::Ptr<ns3::NetDevice>, ns3::Ptr<ns3::Packet const>, unsigned short, ns3::Address const&>::operator() (this=0x55555579d840, uargs#0=..., 
+    uargs#1=..., uargs#2=2048, uargs#3=...) at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/core/model/callback.h:282
+#87 0x00007ffff7dff307 in ns3::Callback<bool, ns3::Ptr<ns3::NetDevice>, ns3::Ptr<ns3::Packet const>, unsigned short, ns3::Address const&>::operator() (this=0x5555555c1420, uargs#0=..., uargs#1=..., 
+    uargs#2=2048, uargs#3=...) at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/core/model/callback.h:588
+#88 0x00007ffff50dcb2f in ns3::PointToPointNetDevice::Receive (this=0x5555555c1290, packet=...)
+    at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/point-to-point/model/point-to-point-net-device.cc:383
+#89 0x00007ffff50d0ae6 in ns3::MakeEvent<void (ns3::PointToPointNetDevice::*)(ns3::Ptr<ns3::Packet>), ns3::Ptr<ns3::PointToPointNetDevice>, ns3::Ptr<ns3::Packet> >(void (ns3::PointToPointNetDevice::*)(ns3::Ptr<ns3::Packet>), ns3::Ptr<ns3::PointToPointNetDevice>, ns3::Ptr<ns3::Packet>)::EventMemberImpl1::Notify() (this=0x5555559dfbb0)
+    at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/core/model/make-event.h:449
+#90 0x00007ffff3d6f319 in ns3::EventImpl::Invoke (this=0x5555559dfbb0) at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/core/model/event-impl.cc:52
+#91 0x00007ffff3d74ed4 in ns3::DefaultSimulatorImpl::ProcessOneEvent (this=0x5555556e3e60) at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/core/model/default-simulator-impl.cc:144
+#92 0x00007ffff3d753a5 in ns3::DefaultSimulatorImpl::Run (this=0x5555556e3e60) at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/core/model/default-simulator-impl.cc:197
+#93 0x00007ffff3d7029e in ns3::Simulator::Run () at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/src/core/model/simulator.cc:180
+#94 0x0000555555577da2 in main (argc=2, argv=0x7fffffffd7e8) at /home/grant/Downloads/ns-allinone-3.40/ns-3.40/scratch/6110finalproject/CongestionTestQuic/quicTest.cc:402

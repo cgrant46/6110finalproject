@@ -241,7 +241,7 @@ main(int argc, char* argv[])
 
     PointToPointHelper SlowLink;
     SlowLink.SetDeviceAttribute("DataRate", StringValue("100Mbps"));
-    SlowLink.SetChannelAttribute("Delay", StringValue("0.0100ms"));
+    SlowLink.SetChannelAttribute("Delay", StringValue("100ms"));
 
     PointToPointHelper UnReLink;
     UnReLink.SetDeviceAttribute("DataRate", StringValue(dataRate));
