@@ -1,0 +1,2 @@
+Starting application at 1.18857sec
+Command 'build/scratch/6110finalproject/CongestionTestQuic/ns3.40-quicTest-debug --link=slow' died with <Signals.SIGABRT: 6>.

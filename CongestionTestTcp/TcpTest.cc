@@ -177,7 +177,9 @@ main(int argc, char* argv[])
     cmd.AddValue("link", "Link Type (slow, fast, unrel)", link);
     cmd.Parse(argc, argv);
 
-
+    prefix_file_name = prefix_file_name.append("-");
+    prefix_file_name = prefix_file_name.append(link);
+    
     if (!link.compare("slow")){
         link_type = SLOW;
     } else if (!link.compare("fast")) {

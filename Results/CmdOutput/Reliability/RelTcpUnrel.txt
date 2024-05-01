@@ -1,0 +1,2 @@
+starting at 1.18857
+Flow 1 at node sink1 received 844856 bytes from node source1; goodput was 44911.9
