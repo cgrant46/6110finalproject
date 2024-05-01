@@ -1,3 +1,8 @@
+This entire repository can be cloned into the scratch folder. Follow the instructions below to get QUIC working on your local machine.
+
+
+Instructions for installing QUIC: 
+
 cd to the ns-3.40/src folder
 
 Run the following command: 
