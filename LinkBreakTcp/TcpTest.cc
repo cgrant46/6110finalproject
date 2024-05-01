@@ -75,19 +75,6 @@ std::vector<double> flowStarts;
 
 enum LINK_TYPE {SLOW, FAST, UNREL};
 
-/**
- * Get the Node Id From Context.
- *
- * \param context The context.
- * \return the node ID.
- */
-/* static uint32_t
-GetNodeIdFromContext(std::string context)
-{
-    const std::size_t n1 = context.find_first_of('/', 1);
-    const std::size_t n2 = context.find_first_of('/', n1 + 1);
-    return std::stoul(context.substr(n1 + 1, n2 - n1 - 1));
-} */
 
 /**
  * Congestion window tracer.
@@ -99,8 +86,7 @@ GetNodeIdFromContext(std::string context)
 static void
 CwndTracer(uint32_t oldval, uint32_t newval)
 {
-    uint32_t nodeId = 0;//GetNodeIdFromContext(context);
-    //std::cout << "TRACE CALLED\n";
+    uint32_t nodeId = 0;
     
     if (firstCwnd[nodeId])
     {
@@ -206,7 +192,6 @@ main(int argc, char* argv[])
     NS_ABORT_MSG_UNLESS (TypeId::LookupByNameFailSafe (transport_prot, &tcpTid), "TypeId " << transport_prot << " not found");
     Config::SetDefault ("ns3::TcpL4Protocol::SocketType", TypeIdValue (TypeId::LookupByName (transport_prot)));
 
-    //LogComponentEnable("OnOffApplication", LOG_LEVEL_INFO);
 
     // Create gateways, sources, and sinks
     NodeContainer sources;
@@ -330,7 +315,6 @@ main(int argc, char* argv[])
     
     Address sinkLocalAddress(InetSocketAddress(Ipv4Address::GetAny(), port));
 
-
     PacketSinkHelper sinkHelper("ns3::TcpSocketFactory", sinkLocalAddress);
     sinkHelper.SetAttribute("Protocol", TypeIdValue(TcpSocketFactory::GetTypeId()));
 
@@ -340,22 +324,6 @@ main(int argc, char* argv[])
     sinkApp.Stop(Seconds(20.0));
     apps.push_back(sinkApp);
 
-    // for (uint32_t i = 0; i < 3; ++i) {
-    //     sinkHelper.SetAttribute("Local", AddressValue(InetSocketAddress(Ipv4Address::GetAny(), port + i)));
-    //     ApplicationContainer secondSinkApp = sinkHelper.Install(sinks.Get(1));
-    //     secondSinkApp.Start(Seconds(0.0));
-    //     secondSinkApp.Stop(Seconds(20.0));
-    //     apps.push_back(sinkApp);
-
-    //     AddressValue bulkSinkAddress(InetSocketAddress(sink_interfaces.GetAddress(nFlows+1), port + i));
-    //     BulkSendHelper bulkSend("ns3::TcpSocketFactory", Address());
-    //     bulkSend.SetAttribute("Remote", bulkSinkAddress);
-    //     bulkSend.SetAttribute("MaxBytes", UintegerValue(0));
-    //     ApplicationContainer bulkSendApp = bulkSend.Install(sources.Get(1));
-    //     bulkSendApp.Start(Seconds(5.0));
-    //     bulkSendApp.Stop(Seconds(15.0)); 
-    //     apps.push_back(bulkSendApp);
-    // }
 
     AddressValue remoteAddress(InetSocketAddress(sink_interfaces.GetAddress(nFlows), port));
 
@@ -376,7 +344,6 @@ main(int argc, char* argv[])
     apps.push_back(sourceApp);
     Simulator::Schedule(Seconds(19.9999), &getRx, sinkApp, 0, 0, 1);
     
-    
 
     // Set up tracing if enabled
     if (tracing)
@@ -387,25 +354,22 @@ main(int argc, char* argv[])
         ascii_wrap = new OutputStreamWrapper(prefix_file_name + "-ascii", std::ios::out);
         stack.EnableAsciiIpv4All(ascii_wrap);
 
-        //for (uint16_t index = 0; index < sources.GetN(); index++)
+        std::string flowString;
+        if (nFlows > 1)
         {
-            std::string flowString;
-            if (nFlows > 1)
-            {
-                flowString = "-flow" + std::to_string(0);
-            }
-
-            firstCwnd[sources.Get(0)->GetId()] = true;
-            firstSshThr[sources.Get(0)->GetId()] = true;
-            firstRtt[sources.Get(0)->GetId()] = true;
-            firstRto[sources.Get(0)->GetId()] = true;
-
-            Simulator::Schedule(Seconds(flowStarts[0] + 0.001),
-                                &TraceCwnd,
-                                prefix_file_name + flowString + "-cwnd.data",
-                                sources.Get(0)->GetId());
-            
+            flowString = "-flow" + std::to_string(0);
         }
+
+        firstCwnd[sources.Get(0)->GetId()] = true;
+        firstSshThr[sources.Get(0)->GetId()] = true;
+        firstRtt[sources.Get(0)->GetId()] = true;
+        firstRto[sources.Get(0)->GetId()] = true;
+
+        Simulator::Schedule(Seconds(flowStarts[0] + 0.001),
+                            &TraceCwnd,
+                            prefix_file_name + flowString + "-cwnd.data",
+                            sources.Get(0)->GetId());
+            
     }
 
     if (pcap)
